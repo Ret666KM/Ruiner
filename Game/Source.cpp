@@ -9,6 +9,7 @@ Basic::Basic(Robot &data)
 	this->node = data;
 	setTotalHealth();
 	setTotalDamage();
+	setCost();
 	}
 
 void Basic::setStrenght(int value)
@@ -43,7 +44,7 @@ void Basic::setName(std::string str)
 	this->node.name = str;
 	}
 
-void Player::setCost()
+void Basic::setCost()
 	{
 	this->cost = COST_MULTIPLIER * (getStrenght() + getProtection() + getAgility());
 	}
@@ -88,10 +89,15 @@ std::string Basic::getName()
 	return this->node.name;
 	}
 
-int Player::getCost()
+int Basic::getCost()
 	{
-	return (this->cost + this->outfit.head.cost + this->outfit.body.cost + this->outfit.hands.cost + this->outfit.legs.cost) / 2;
+	return this->cost / 2;
 	}
+
+int Player::getCost()
+{
+	return (this->cost + this->outfit.head.cost + this->outfit.body.cost + this->outfit.hands.cost + this->outfit.legs.cost) / 2;
+}
 
 bool Player::outfitIsEmpty()
 {
@@ -138,11 +144,11 @@ Player::Player()
 Player::Player(int points)
 	{
 	setPoint(points);
-	setExperience(0);
 	setStrenght(0);
 	setProtection(0);
 	setAgility(0);
 	setName("Unnamed");
+	this->experience = 0;
 	this->outfit = { { 0, 0, 0, 0, "head", ""}, { 0, 0, 0, 0, "body", ""}, { 0, 0, 0, 0, "hands", ""}, { 0, 0, 0, 0, "legs", ""} };
 	}
 
@@ -171,7 +177,7 @@ void Player::setOutfit(Item &data)
 
 void Player::setExperience(int value)
 	{
-	this->experience = value;
+	this->experience += value;
 	}
 
 void Player::setPoint(int value)
@@ -193,7 +199,7 @@ void Application::run()
 {
 	Profile game;
 	int choice;
-	mciSendString("play run.mp3 repeat", NULL, 0, NULL);
+	mciSendString("play audio/run.mp3 repeat", NULL, 0, NULL);
 	
 	while (true)
 		{
@@ -214,7 +220,7 @@ void Application::run()
 			std::string name;
 			std::cin >> name;
 			game.setNameProfile(name);
-			mciSendString("play set_name.wav", NULL, 0, NULL);
+			mciSendString("play audio/set_name.wav", NULL, 0, NULL);
 			Player player(3);
 			game.setCurrentRobot(player);
 			game.edit(" Create a new robot ");
@@ -235,7 +241,7 @@ void Application::run()
 			}
 		}
 	
-	mciSendString("stop run.mp3", NULL, 0, NULL);
+	mciSendString("stop audio/run.mp3", NULL, 0, NULL);
 	game.start();
 }
 
@@ -243,7 +249,7 @@ int cinDebug()
 	{
 	int choice;
 	std::cin >> choice;
-	mciSendString("play choice.wav", NULL, 0, NULL);
+	mciSendString("play audio/choice.wav", NULL, 0, NULL);
 
 	if (!std::cin)
 		{

@@ -12,11 +12,11 @@ Fight::Fight(Basic &data)
 	}
 
 Fight::Fight(Player & data)
-{
+	{
 	this->attacker = data;
 	this->HP = data.getTotalHealth() + data.getArmor();
 	this->dodgeChance = data.getAgility() * AGILITY_MULTIPLIER;
-}
+	}
 
 void Fight::takeDamage(int value)
 	{
@@ -27,7 +27,7 @@ void Fight::takeDamage(int value)
 	if (hitFactor > this->dodgeChance)
 		{
 		this->HP = this->HP - value;
-		mciSendString("play hit.wav", NULL, 0, NULL);
+		mciSendString("play audio/hit.wav", NULL, 0, NULL);
 		std::cout << "* * * " << getFighterName() << " RECEIVED " << value << " POINTS DAMAGE! * * *" << std::endl;
 		}
 	
@@ -56,11 +56,12 @@ std::string Fight::getFighterName()
 
 bool Profile::fight(Basic &data)
 {
+	mciSendString("stop audio/start.mp3", NULL, 0, NULL);
 	Fight player(*this->currentRobot);
 	Fight enemy(data);
 	int x, y, result;
 	bool exodus;
-	mciSendString("play fight.mp3 repeat", NULL, 0, NULL);
+	mciSendString("play audio/fight.mp3 repeat", NULL, 0, NULL);
 		
 	std::thread th([&]()
 		{
@@ -97,6 +98,6 @@ bool Profile::fight(Basic &data)
 	exodus = (exodus != false) ? true : exodus;
 	th.join();
 
-	mciSendString("stop fight.mp3", NULL, 0, NULL);
+	mciSendString("stop audio/fight.mp3", NULL, 0, NULL);
 	return exodus;
 }

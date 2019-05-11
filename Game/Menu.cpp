@@ -52,6 +52,11 @@ void Profile::menu(std::string str)
 		showRobots();
 		}
 
+	else if (str == "   TRAINING   ")
+		{
+		showEnemies();
+		}
+
 	std::cout << " " << ch1 << ch1 << (char)205 << ch1 << (char)205 << ch1 << ch1 << " " << std::endl;
 	std::cout << " Robot: " << (*this->currentRobot).getName() << "\t XP: " << (*currentRobot).getExperience() << "/1000\t Points: " << (*currentRobot).getPoint() << "\t Money: " << this->money << std::endl;
 	std::cout << " " << ch1 << ch1 << (char)205 << ch1 << (char)205 << ch1 << ch1 << " " << std::endl;
@@ -440,9 +445,9 @@ void Profile::robots()
 
 void Profile::start()
 {
+	mciSendString("play audio/start.mp3 repeat", NULL, 0, NULL);
 	setCurrentRobot(playerList.front());
 	int choice = 1;
-	mciSendString("play start.mp3 repeat", NULL, 0, NULL);
 
 	while (choice)
 		{
@@ -453,26 +458,44 @@ void Profile::start()
 			{
 			case 0:
 				{
-				mciSendString("stop start.mp3", NULL, 0, NULL);
+				mciSendString("stop audio/start.mp3", NULL, 0, NULL);
 				break;
 				}
 			case 1:
 				{
-				mciSendString("stop start.mp3", NULL, 0, NULL);
+				mciSendString("stop audio/start.mp3", NULL, 0, NULL);
 				system("pause");
-				mciSendString("play start.mp3 repeat", NULL, 0, NULL);
+				mciSendString("play audio/start.mp3 repeat", NULL, 0, NULL);
 				break;
 				}
 			case 2:
 				{
-				mciSendString("stop start.mp3", NULL, 0, NULL);
-				for (int i = 0; i < this->mobsVector.size(); ++i)
-				{
-					std::cout << this->mobsVector[i].getName() << " " << this->mobsVector[i].getTotalDamage() << " " << this->mobsVector[i].getTotalHealth() << std::endl;
-				}
-				std::cout << (fight(this->mobsVector.front()) == true ? "You're win!" : "You're lose!") << std::endl;
-				system("pause");
-				mciSendString("play start.mp3 repeat", NULL, 0, NULL);
+				menu("   TRAINING   ");
+				int i;
+				std::cout << " Select enemy!\n" << " If you want to return, enter '0'.\n\n" << " Your choice: ";
+				i = cinDebug();
+				
+				if (i)
+					{
+					bool currentFight = fight(this->mobsVector[i - 1]);
+
+					if (currentFight)
+						{
+						std::cout << "\n * * * YOU'RE WIN! * * *" << std::endl;
+						int reward = this->mobsVector[i - 1].getCost();
+						this->money += reward;
+						this->currentRobot->setExperience(reward);
+						}
+
+					else
+						{
+						std::cout << "\n * * * YOU'RE LOSE! * * *" << std::endl;
+						}
+
+					system("pause");
+					}
+
+				mciSendString("play audio/start.mp3 repeat", NULL, 0, NULL);
 				break;
 				}
 			case 3:
@@ -528,7 +551,7 @@ void Profile::edit(std::string str)
 				std::string name;
 				std::cin >> name;
 				(*currentRobot).setName(name);
-				mciSendString("play set_name.wav", NULL, 0, NULL);
+				mciSendString("play audio/set_name.wav", NULL, 0, NULL);
 				break;
 				}
 
@@ -579,14 +602,14 @@ void Profile::distributeSkills()
 				{
 				(*currentRobot).setStrenght(++skill);
 				(*currentRobot).setPoint(--point);
-				mciSendString("play skill_up.wav", NULL, 0, NULL);
+				mciSendString("play audio/skill_up.wav", NULL, 0, NULL);
 				}
 
 			else if (choice[1] == '-' && skill > 0)
 				{
 				(*currentRobot).setStrenght(--skill);
 				(*currentRobot).setPoint(++point);
-				mciSendString("play skill_down.wav", NULL, 0, NULL);
+				mciSendString("play audio/skill_down.wav", NULL, 0, NULL);
 				}
 			}
 		else if (choice[0] == 'P')
@@ -597,14 +620,14 @@ void Profile::distributeSkills()
 				{
 				(*currentRobot).setProtection(++skill);
 				(*currentRobot).setPoint(--point);
-				mciSendString("play skill_up.wav", NULL, 0, NULL);
+				mciSendString("play audio/skill_up.wav", NULL, 0, NULL);
 				}
 
 			else if (choice[1] == '-' && skill > 0)
 				{
 				(*currentRobot).setProtection(--skill);
 				(*currentRobot).setPoint(++point);
-				mciSendString("play skill_down.wav", NULL, 0, NULL);
+				mciSendString("play audio/skill_down.wav", NULL, 0, NULL);
 
 				}
 			}
@@ -617,18 +640,18 @@ void Profile::distributeSkills()
 				{
 				(*currentRobot).setAgility(++skill);
 				(*currentRobot).setPoint(--point);
-				mciSendString("play skill_up.wav", NULL, 0, NULL);
+				mciSendString("play audio/skill_up.wav", NULL, 0, NULL);
 				}
 
 			else if (choice[1] == '-' && skill > 0)
 				{
 				(*currentRobot).setAgility(--skill);
 				(*currentRobot).setPoint(++point);
-				mciSendString("play skill_down.wav", NULL, 0, NULL);
+				mciSendString("play audio/skill_down.wav", NULL, 0, NULL);
 				}
 			}
 		}
-	mciSendString("play choice.wav", NULL, 0, NULL);
+	mciSendString("play audio/choice.wav", NULL, 0, NULL);
 	(*currentRobot).setCost();
 	}
 
@@ -672,35 +695,30 @@ void Profile::showStorage()
 
 	if ((*this->currentRobot).outfitIsEmpty() == false)
 		{
-		int i = 1;
 		std::cout << " ID: \tAg-ty: \tDmg: \tArmor: \tCost: \tType: \t\tName:" << std::endl;
 
 		if ((*this->currentRobot).getOutfit().head.name != "")
 			{
-			std::cout << " " << i << " \t" << (*this->currentRobot).getOutfit().head.agilityEffect << " \t" << (*this->currentRobot).getOutfit().head.damageEffect << " \t" << (*this->currentRobot).getOutfit().head.armorEffect;
+			std::cout << " " << 1 << " \t" << (*this->currentRobot).getOutfit().head.agilityEffect << " \t" << (*this->currentRobot).getOutfit().head.damageEffect << " \t" << (*this->currentRobot).getOutfit().head.armorEffect;
 			std::cout << " \t" << (*this->currentRobot).getOutfit().head.cost / 2 << " \t" << (*this->currentRobot).getOutfit().head.type << " \t\t" << (*this->currentRobot).getOutfit().head.name << std::endl;
-			++i;
 			}
 
 		if ((*this->currentRobot).getOutfit().body.name != "")
 			{
-			std::cout << " " << i << " \t" << (*this->currentRobot).getOutfit().body.agilityEffect << " \t" << (*this->currentRobot).getOutfit().body.damageEffect << " \t" << (*this->currentRobot).getOutfit().body.armorEffect;
+			std::cout << " " << 2 << " \t" << (*this->currentRobot).getOutfit().body.agilityEffect << " \t" << (*this->currentRobot).getOutfit().body.damageEffect << " \t" << (*this->currentRobot).getOutfit().body.armorEffect;
 			std::cout << " \t" << (*this->currentRobot).getOutfit().body.cost / 2 << " \t" << (*this->currentRobot).getOutfit().body.type << " \t\t" << (*this->currentRobot).getOutfit().body.name << std::endl;
-			++i;
 			}
 
 		if ((*this->currentRobot).getOutfit().hands.name != "")
 			{
-			std::cout << " " << i << " \t" << (*this->currentRobot).getOutfit().hands.agilityEffect << " \t" << (*this->currentRobot).getOutfit().hands.damageEffect << " \t" << (*this->currentRobot).getOutfit().hands.armorEffect;
+			std::cout << " " << 3 << " \t" << (*this->currentRobot).getOutfit().hands.agilityEffect << " \t" << (*this->currentRobot).getOutfit().hands.damageEffect << " \t" << (*this->currentRobot).getOutfit().hands.armorEffect;
 			std::cout << " \t" << (*this->currentRobot).getOutfit().hands.cost / 2 << " \t" << (*this->currentRobot).getOutfit().hands.type << " \t\t" << (*this->currentRobot).getOutfit().hands.name << std::endl;
-			++i;
 			}
 
 		if ((*this->currentRobot).getOutfit().legs.name != "")
 			{
-			std::cout << " " << i << " \t" << (*this->currentRobot).getOutfit().legs.agilityEffect << " \t" << (*this->currentRobot).getOutfit().legs.damageEffect << " \t" << (*this->currentRobot).getOutfit().legs.armorEffect;
+			std::cout << " " << 4 << " \t" << (*this->currentRobot).getOutfit().legs.agilityEffect << " \t" << (*this->currentRobot).getOutfit().legs.damageEffect << " \t" << (*this->currentRobot).getOutfit().legs.armorEffect;
 			std::cout << " \t" << (*this->currentRobot).getOutfit().legs.cost / 2 << " \t" << (*this->currentRobot).getOutfit().legs.type << " \t\t" << (*this->currentRobot).getOutfit().legs.name << std::endl;
-			++i;
 			}
 		}
 
@@ -735,6 +753,16 @@ void Profile::showRobots()
 		++i;
 		}
 	}
+
+void Profile::showEnemies()
+{
+	std::cout << " ID: \tDmg: \tHP: \tClan:" << std::endl;
+
+	for (int i = 0; i < this->mobsVector.size(); ++i)
+	{
+		std::cout << " " << i + 1 << " \t" << this->mobsVector[i].getTotalDamage() << " \t" << this->mobsVector[i].getTotalHealth() << " \t" << this->mobsVector[i].getName() << std::endl;
+	}
+}
 
 std::vector<Item> Profile::getStoreVector()
 	{
@@ -792,8 +820,8 @@ void Profile::setMobsVector()
 								   { 3, 3, 2, 150, 15, "Observer" },
 								   { 3, 6, 4, 200, 20, "Armadillo"},
 								   { 6, 2, 5, 200, 20, "Hunter"   },
-								   { 9, 6, 3, 250, 25, "Panzer"   },
-								   { 7, 3, 8, 250, 25, "Assassin" } };
+								   { 7, 3, 8, 250, 25, "Assassin" },
+								   { 9, 6, 3, 250, 25, "Panzer"   } };
 		
 	for (int i = 0; i < NUMBER_OF_CLANS; ++i)
 		{

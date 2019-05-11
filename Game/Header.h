@@ -62,10 +62,12 @@ class Basic
 		void setName(std::string str);
 		void setTotalHealth();
 		void setTotalDamage();
+		void setCost();
 		int getStrenght();
 		int getProtection();
 		int getHealth();
 		int getTotalHealth();
+		virtual int getCost();
 		virtual int getAgility();
 		virtual int getTotalDamage();
 		std::string getName();
@@ -74,6 +76,7 @@ class Basic
 		Robot node;
 		int totalHealth;
 		int totalDamage;
+		int cost;
 	};
 
 class Player : public Basic
@@ -84,13 +87,12 @@ class Player : public Basic
 		void setOutfit(Item &data);
 		void setExperience(int value);
 		void setPoint(int value);
-		void setCost();
 		int getArmor();
+		int getCost() override;
 		int getAgility() override;
 		int getTotalDamage() override;
 		int getExperience();
 		int getPoint();
-		int getCost();
 		bool outfitIsEmpty();
 		Equipment getOutfit();
 		
@@ -98,7 +100,6 @@ class Player : public Basic
 		Equipment outfit;
 		int experience;
 		int point;
-		int cost;
 	};
 
 class Boss : public Basic
@@ -154,6 +155,7 @@ class Profile
 		void showStore(std::string &filter);
 		void showStorage();
 		void showRobots();
+		void showEnemies();
 		bool fight(Basic &data);
 		Player getCurrentRobot();
 		std::list<Player> getPlayerList();
