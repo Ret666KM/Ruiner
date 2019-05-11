@@ -15,13 +15,31 @@
 
 #undef max
 
+/*********************************************************
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+**********************************************************
+			**	**      **    ***  **       **
+			**  **      **  ***    ****   ****
+		**************	*****      ** ** ** **
+			**	**      ***        **  ***  **
+		**************	*****      **       **
+			**	**      **  ***    **       **
+			**	**      **    ***  **       **
+**********************************************************
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+**********************************************************/
+
 const int PROTECTION_MULTIPLIER = 30;
 const int STRENGHT_MULTIPLIER = 5;
 const int AGILITY_MULTIPLIER = 8;
 const int COST_MULTIPLIER = 100;
 const int NUMBER_OF_CLANS = 7;
 
-int cinDebug();
+int cinDebug();	  //  Отладчик при вводе неверного типа данных
+
+/********************************
+	  Характеристики робота
+********************************/
 
 struct Robot
 	{
@@ -33,6 +51,10 @@ struct Robot
 	std::string name;
 	};
 
+/*********************************
+	   Характеристики вещи
+**********************************/
+
 struct Item
 	{
 	int agilityEffect;
@@ -43,35 +65,42 @@ struct Item
 	std::string name;
 	};
 
+/*********************************
+		Снаряжение робота
+*********************************/
+
 struct Equipment
-{
+	{
 	Item head;
 	Item body;
 	Item hands;
 	Item legs;
-};
+	};
+
+/******************************************************************
+		Базовый класс, на котором строятся игрок и враги
+******************************************************************/
 
 class Basic
 	{
 	public:
 		Basic();
-		Basic(Robot &data);
-		void setStrenght(int value);
-		void setProtection(int value);
-		void setAgility(int value);
-		void setName(std::string str);
+		Basic(Robot& data);
+		void setAgility(const int& value);
+		void setStrenght(const int& value);
+		void setProtection(const int& value);
+		void setName(const std::string& str);
 		void setTotalHealth();
 		void setTotalDamage();
 		void setCost();
+		int getHealth();
 		int getStrenght();
 		int getProtection();
-		int getHealth();
 		int getTotalHealth();
 		virtual int getCost();
 		virtual int getAgility();
 		virtual int getTotalDamage();
 		std::string getName();
-
 	protected:
 		Robot node;
 		int totalHealth;
@@ -79,99 +108,109 @@ class Basic
 		int cost;
 	};
 
+/*********************************
+	  Класс роботов игрока
+*********************************/
+
 class Player : public Basic
 	{
 	public:
 		Player();
 		Player(int points);
-		void setOutfit(Item &data);
-		void setExperience(int value);
-		void setPoint(int value);
+		void setPoint(int& value);
+		void setOutfit(const Item& data);
+		void setExperience(const int& value);
 		int getArmor();
+		int getPoint();
+		int getExperience();
 		int getCost() override;
 		int getAgility() override;
 		int getTotalDamage() override;
-		int getExperience();
-		int getPoint();
 		bool outfitIsEmpty();
 		Equipment getOutfit();
-		
 	private:
 		Equipment outfit;
 		int experience;
 		int point;
 	};
 
+/*********************************
+	  Класс врагов-боссов
+*********************************/
+
 class Boss : public Basic
 	{
 	public:
-		std::string getReplica(int &i);
-		void setReplica(std::string str);
-
+		std::string getReplica(const int& i);
+		void setReplica(const std::string& str);
 	private:
 		std::vector<std::string> replicas;
 	};
 
+/*********************************
+	  Класс боевой системы
+*********************************/
 
 class Fight
 	{
 	public:
 		Fight();
-		Fight(Basic &data);
-		Fight(Player &data);
-		int getHP();
-		void strike(Fight &data);
-		void takeDamage(int value);
+		Fight(Basic& data);		//	Конструктор врага
+		Fight(Player& data);	//	Конструктор игрока
+		void strike(Fight& data);
+		void takeDamage(const int& value);
 		std::string getFighterName();
-
+		int getHP();
 	private:
 		int HP;
 		int dodgeChance;
 		Basic attacker;
 	};
 
+/******************************************************************
+			Класс, включаещий в себя весь интерфейс
+******************************************************************/
 
 class Profile
 	{
 	public:
 		Profile();
-		void info(std::string str);
-		void menu(std::string str);
-		void edit(std::string str);
-		void fightPanel(Fight &_player, Fight &_enemy, int &_x, int &_y);
+		void info(const std::string& str);	//	Строка характеристик робота
+		void edit(const std::string& str);	//	Редактор робота
+		void menu(const std::string& str);	//	Строка меню
+		void fightPanel(Fight& _player, Fight& _enemy, const int& _x, const int& _y);
 		void distributeSkills();
-		void start();
-		void store();
-		void robots();
+		void start();	//	Запуск меню игры
+		void store();	//	Вкладка меню "Магазин"
+		void robots();	//	Вкладка меню "Роботы"
 		void setMobsVector();
 		void setStoreVector();
 		void setOutfitVector();
-		void setPlayerList(Player &data);
-		void setBossesStack(Basic &data);
-		void setCurrentRobot(Player &data);
-		void setNameProfile(std::string &name);
-		void setStorageList(Item &item);
-		void putOutfitRobot(Item &data);
-		void showStore(std::string &filter);
+		void setStorageList(Item& item);
+		void setPlayerList(Player& data);
+		void setBossesStack(Basic& data);
+		void setCurrentRobot(Player& data);
+		void setNameProfile(const std::string& name);
+		void showStore(const std::string& filter);
+		void putOutfitRobot(const Item& data);
 		void showStorage();
 		void showRobots();
 		void showEnemies();
 		bool fight(Basic &data);
 		Player getCurrentRobot();
+		std::string getNameProfile();
 		std::list<Player> getPlayerList();
 		std::stack<Basic> getBossesStack();
 		std::vector<Basic> getMobsVector();
 		std::vector<Item> getStoreVector();
 		std::vector<Item*> getOutfitVector();
-		std::list<Item> getStorageList();
-		std::string getNameProfile();
-			
+		std::list<Item> getStorageList();	
 	private:
-		std::list<Player> playerList;
-		std::vector<Basic> mobsVector;
-		std::stack<Basic> bossesPlayerStack;
 		std::vector<Item*> outfitVector;
 		std::vector<Item> storeVector;
+		std::vector<Basic> mobsVector;
+		std::stack<Basic> bossesStack;
+		std::list<Player> playerList;
 		std::list<Item> storageList;
 		std::list<Item> itemsList;
 		std::string nameProfile;
@@ -180,11 +219,14 @@ class Profile
 		int money;
 	};
 
+/*********************************
+		 Класс приложения
+*********************************/
+
 class Application
 	{
 	public:
 		void run();
-
 	private:
 		std::list<Profile> gameList;
 	};

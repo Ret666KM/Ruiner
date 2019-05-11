@@ -1,25 +1,44 @@
 #include "Header.h"
 
+/********************************
+		  Функции Fight
+********************************/
+
 Fight::Fight()
-	{
+	{	//	Конструктор по-умолчанию
 	}
 
-Fight::Fight(Basic &data)
-	{
+Fight::Fight(Basic& data)
+	{	//	Конструктор врага
 	this->attacker = data;
 	this->HP = data.getTotalHealth();
 	this->dodgeChance = data.getAgility() * AGILITY_MULTIPLIER;
 	}
 
-Fight::Fight(Player & data)
-	{
+Fight::Fight(Player& data)
+	{	//	Конструктор игрока
 	this->attacker = data;
 	this->HP = data.getTotalHealth() + data.getArmor();
 	this->dodgeChance = data.getAgility() * AGILITY_MULTIPLIER;
 	}
 
-void Fight::takeDamage(int value)
-	{
+int Fight::getHP()
+	{	//	Отображение здоровья
+	return this->HP;
+	}
+
+std::string Fight::getFighterName()
+	{	//	Отображение имени
+	return this->attacker.getName();
+	}
+
+void Fight::strike(Fight& data)
+	{	//	Нанесение урона
+	data.takeDamage(this->attacker.getTotalDamage());
+	}
+
+void Fight::takeDamage(const int& value)
+	{	//	Получение урона
 	int hitFactor;
 	srand(time(NULL));
 	hitFactor = rand() % 101;
@@ -30,7 +49,7 @@ void Fight::takeDamage(int value)
 		mciSendString("play audio/hit.wav", NULL, 0, NULL);
 		std::cout << "* * * " << getFighterName() << " RECEIVED " << value << " POINTS DAMAGE! * * *" << std::endl;
 		}
-	
+
 	else
 		{
 		std::cout << "* * * DODGE! * * *" << std::endl;
@@ -39,23 +58,12 @@ void Fight::takeDamage(int value)
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 
-void Fight::strike(Fight & data)
-	{
-	data.takeDamage(this->attacker.getTotalDamage());
-	}
-
-int Fight::getHP()
-	{
-	return this->HP;
-	}
-
-std::string Fight::getFighterName()
-	{
-	return this->attacker.getName();
-	}
+/********************************
+		  Битва роботов
+********************************/
 
 bool Profile::fight(Basic &data)
-{
+	{
 	mciSendString("stop audio/start.mp3", NULL, 0, NULL);
 	Fight player(*this->currentRobot);
 	Fight enemy(data);
@@ -64,7 +72,7 @@ bool Profile::fight(Basic &data)
 	mciSendString("play audio/fight.mp3 repeat", NULL, 0, NULL);
 		
 	std::thread th([&]()
-		{
+		{	//	Поток битвы врага
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
 		while (enemy.getHP() > 0 && player.getHP() > 0)
@@ -83,11 +91,11 @@ bool Profile::fight(Basic &data)
 		y = rand() % 101;
 		fightPanel(player, enemy, x, y);
 		result = cinDebug();
+
 		if (x + y == result)
 			{
 			player.strike(enemy);
 			}
-
 		else
 			{
 			std::cout << "* * * MISS! * * *" << std::endl;
