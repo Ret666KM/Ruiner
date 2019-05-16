@@ -1,15 +1,15 @@
 ﻿#include "Header.h"
 
 /********************************
-		  Функции Basic
+          Функции Basic
 ********************************/
 
 Basic::Basic()
-	{	//	Конструктор по-умолчанию
+	{  //  Конструктор по-умолчанию
 	}
 
 Basic::Basic(Robot &data)
-	{	//	Конструктор роботов
+	{  //  Конструктор роботов
 	this->node = data;
 	setTotalHealth();
 	setTotalDamage();
@@ -17,106 +17,106 @@ Basic::Basic(Robot &data)
 	}
 
 void Basic::setStrenght(const int& value)
-	{	//	Установление показателя силы
+	{  //  Установление показателя силы
 	this->node.strength = value;
 	setTotalDamage();
 	}
 
 void Basic::setProtection(const int& value)
-	{	//	Установление показателя защиты
+	{  //  Установление показателя защиты
 	this->node.protection = value;
 	setTotalHealth();
 	}
 
 void Basic::setAgility(const int& value)
-	{	//	Установление показателя ловкости
+	{  //  Установление показателя ловкости
 	this->node.agility = value;
 	}
 
 void Basic::setName(const std::string& str)
-	{	//	Установление имени робота
+	{  //  Установление имени робота
 	this->node.name = str;
 	}
 
 void Basic::setCost()
-	{	//	Установление ценности робота
+	{  //  Установление ценности робота
 	this->cost = COST_MULTIPLIER * (getStrenght() + getProtection() + getAgility());
 	}
 
 void Basic::setTotalDamage()
-	{	//	Установление урона
+	{  //  Установление урона
 	this->totalDamage = this->node.strength * STRENGHT_MULTIPLIER + this->node.damage;
 	}
 
 void Basic::setTotalHealth()
-	{	//	Установление полного здоровья
+	{  //  Установление полного здоровья
 	this->totalHealth = this->node.protection * PROTECTION_MULTIPLIER + this->node.health;
 	}
 
 int Basic::getStrenght()
-	{	//	Отображение показателя силы
+	{  //  Отображение показателя силы
 	return this->node.strength;
 	}
 
 int Basic::getProtection()
-	{	//	Отображение показателя защиты
+	{  //  Отображение показателя защиты
 	return this->node.protection;
 	}
 
 int Basic::getAgility()
-	{	//	Отображение показателя ловкости
+	{  //  Отображение показателя ловкости
 	return this->node.agility;
 	}
 
 int Basic::getHealth()
-	{	//	Отображение здоровья
+	{  //  Отображение здоровья
 	return this->node.health;
 	}
 
 std::string Basic::getName()
-	{	//	Отображение имени робота
+	{  //  Отображение имени робота
 	return this->node.name;
 	}
 
 int Basic::getCost()
-	{	//	Отображение ценности робота
+	{  //  Отображение ценности робота
 	return this->cost / 2;
 	}
 
 int Basic::getTotalHealth()
-	{	//	Отображение полного здоровья
+	{  //  Отображение полного здоровья
 	return this->totalHealth;
 	}
 
 int Basic::getTotalDamage()
-	{	//	Отображение урона
+	{  //  Отображение урона
 	return this->totalDamage;
 	}
 
 /********************************
-		  Функции Boss
+          Функции Boss
 ********************************/
 
 std::string Boss::getReplica(const int& i)
-	{	//	Отображение реплики
+	{  //  Отображение реплики
 	return this->replicas[i];
 	}
 
 void Boss::setReplica(const std::string& str)
-	{	//	Установление реплики
+	{  //  Установление реплики
 	this->replicas.push_back(str);
 	}
 
 /********************************
-		 Функции Player
+         Функции Player
 ********************************/
 
 Player::Player()
-	{	//	Конструктор по-умолчанию
+	{  //  Конструктор по-умолчанию
 	}
 
 Player::Player(int points)
-	{	//	Конструктор робота игрока
+	{  //  Конструктор робота игрока
 	setPoint(points);
 	setStrenght(0);
 	setProtection(0);
@@ -130,17 +130,17 @@ Player::Player(int points)
 	}
 
 void Player::setPoint(int& value)
-	{	//	Добавление очков
+	{  //  Добавление очков
 	this->point = value;
 	}
 
 void Player::setExperience(const int& value)
-	{	//	Добавление опыта
+	{  //  Добавление опыта
 	this->experience += value;
 	}
 
 void Player::setOutfit(const Item &data)
-	{	//	Добавление экипировки
+	{  //  Добавление экипировки
 	if (this->outfit.head.type == data.type)
 		{
 		this->outfit.head = data;
@@ -160,53 +160,53 @@ void Player::setOutfit(const Item &data)
 	}
 
 int Player::getPoint()
-	{	//	Отображение количества очков
+	{  //  Отображение количества очков
 	return this->point;
 	}
 
 int Player::getExperience()
-	{	//	Отображение опыта
+	{  //  Отображение опыта
 	return this->experience;
 	}
 
 Equipment Player::getOutfit()
-	{	//	Отображение снаряжения
+	{  //  Отображение снаряжения
 	return this->outfit;
 	}
 
 int Player::getCost()
-	{	//	Отображение ценности с учётом экипировки
+	{  //  Отображение ценности с учётом экипировки
 	return (this->cost + this->outfit.head.cost + this->outfit.body.cost + 
 			this->outfit.hands.cost + this->outfit.legs.cost) / 2;
 	}
 
 int Player::getArmor()
-	{	//	Отображение показателя брони
+	{  //  Отображение показателя брони
 	return this->outfit.head.armorEffect + this->outfit.body.armorEffect + 
 		   this->outfit.hands.armorEffect + this->outfit.legs.armorEffect;
 	}
 
 bool Player::outfitIsEmpty()
-	{	//	Проверка на наличие экипировки
+	{  //  Проверка на наличие экипировки
 	return (this->outfit.head.name == "" && this->outfit.body.name == "" && 
 			this->outfit.hands.name == "" && this->outfit.legs.name == "");
 	}
 
 int Player::getAgility()
-	{	//	Отображение показателя ловкости с учётом экипировки
+	{  //  Отображение показателя ловкости с учётом экипировки
 	return this->node.agility + this->outfit.head.agilityEffect + this->outfit.body.agilityEffect + 
 		   this->outfit.hands.agilityEffect + this->outfit.legs.agilityEffect;
 	}
 
 int Player::getTotalDamage()
-	{	//	Отображение урона с учётом экипировки
+	{  //  Отображение урона с учётом экипировки
 	return this->totalDamage = this->node.strength * STRENGHT_MULTIPLIER + this->node.damage 
 							 + this->outfit.head.damageEffect + this->outfit.body.damageEffect 
 							 + this->outfit.hands.damageEffect + this->outfit.legs.damageEffect;
 	}
 
 /********************************
-		Запуск приложения
+        Запуск приложения
 ********************************/
 
 void Application::run()
@@ -262,7 +262,7 @@ void Application::run()
 	}
 
 /****************************************************************
-			Отладчик при вводе неверного типа данных
+            Отладчик при вводе неверного типа данных
 ****************************************************************/
 
 int cinDebug()
@@ -284,7 +284,7 @@ int cinDebug()
 	}
 
 /********************************
-	 Точка старта программы
+     Точка старта программы
 ********************************/
 
 int main()
