@@ -1,78 +1,78 @@
-#include "Header.h"
+Ôªø#include "Header.h"
 
 /********************************
-		  ‘ÛÌÍˆËË Profile
+          –§—É–Ω–∫—Ü–∏–∏ Profile
 ********************************/
 
 Profile::Profile()
-	{	//	 ÓÌÒÚÛÍÚÓ ÔÓÙËÎˇ Ë„ÓÍ‡
+	{  //  –ö–æ–Ω—Å—Ç—Ä—É–∫—Ç–æ—Ä –ø—Ä–æ—Ñ–∏–ª—è –∏–≥—Ä–æ–∫–∞
 	this->money = 500;
 	setMobsVector();
 	setStoreVector();
 	}
 
 void Profile::setNameProfile(const std::string& name)
-	{	//	”ÒÚ‡ÌÓ‚ÎÂÌËÂ ËÏÂÌË ÔÓÙËÎˇ
+	{  //  –£—Å—Ç–∞–Ω–æ–≤–ª–µ–Ω–∏–µ –∏–º–µ–Ω–∏ –ø—Ä–æ—Ñ–∏–ª—è
 	this->nameProfile = name;
 	}
 
 void Profile::setCurrentRobot(Player& data)
-	{	//	Õ‡ÁÌ‡˜ÂÌËÂ ÚÂÍÛ˘Â„Ó Ë„Ó‚Ó„Ó Ó·ÓÚ‡
+	{  //  –ù–∞–∑–Ω–∞—á–µ–Ω–∏–µ —Ç–µ–∫—É—â–µ–≥–æ –∏–≥—Ä–æ–≤–æ–≥–æ —Ä–æ–±–æ—Ç–∞
 	this->currentRobot = &data;
 	}
 
 void Profile::setPlayerList(Player& data)
-	{	//	—Óı‡ÌÂÌËÂ Ó·ÓÚ‡ ‚ ÒÔËÒÓÍ
+	{  //  –°–æ—Ö—Ä–∞–Ω–µ–Ω–∏–µ —Ä–æ–±–æ—Ç–∞ –≤ —Å–ø–∏—Å–æ–∫
 	this->playerList.push_back(data);
 	}
 
 void Profile::setStorageList(Item & item)
-	{	//	—Óı‡ÌÂÌËÂ ‚Â˘Ë ‚ ÒÔËÒÓÍ
+	{  //  –°–æ—Ö—Ä–∞–Ω–µ–Ω–∏–µ –≤–µ—â–∏ –≤ —Å–ø–∏—Å–æ–∫
 	this->storageList.push_back(item);
 	}
 
 std::string Profile::getNameProfile()
-	{	//	ŒÚÓ·‡ÊÂÌËÂ ËÏÂÌË 
+	{  //  –û—Ç–æ–±—Ä–∞–∂–µ–Ω–∏–µ –∏–º–µ–Ω–∏ 
 	return this->nameProfile;
 	}
 
 Player Profile::getCurrentRobot()
-	{	//	ŒÚÓ·‡ÊÂÌËÂ ÚÂÍÛ˘Â„Ó Ë„Ó‚Ó„Ó Ó·ÓÚ‡
+	{  //  –û—Ç–æ–±—Ä–∞–∂–µ–Ω–∏–µ —Ç–µ–∫—É—â–µ–≥–æ –∏–≥—Ä–æ–≤–æ–≥–æ —Ä–æ–±–æ—Ç–∞
 	return *(this->currentRobot);
 	}
 
 std::list<Player> Profile::getPlayerList()
-	{	//	œÓÎÛ˜ÂÌËÂ ÒÔËÒÍ‡ Ó·ÓÚÓ‚
+	{  //  –ü–æ–ª—É—á–µ–Ω–∏–µ —Å–ø–∏—Å–∫–∞ —Ä–æ–±–æ—Ç–æ–≤
 	return this->playerList;
 	}
 
 std::vector<Basic> Profile::getMobsVector()
-	{	//	œÓÎÛ˜ÂÌËÂ ‚ÂÍÚÓ‡ ‚‡„Ó‚
+	{  //  –ü–æ–ª—É—á–µ–Ω–∏–µ –≤–µ–∫—Ç–æ—Ä–∞ –≤—Ä–∞–≥–æ–≤
 	return this->mobsVector;
 	}
 
 std::stack<Basic> Profile::getBossesStack()
-	{	//	œÓÎÛ˜ÂÌËÂ ÒÚÂÍ‡ ‚‡„Ó‚-·ÓÒÒÓ‚
+	{  //  –ü–æ–ª—É—á–µ–Ω–∏–µ —Å—Ç–µ–∫–∞ –≤—Ä–∞–≥–æ–≤-–±–æ—Å—Å–æ–≤
 	return this->bossesStack;
 	}
 
 std::vector<Item> Profile::getStoreVector()
-	{	//	œÓÎÛ˜ÂÌËÂ ‚ÂÍÚÓ‡ Ï‡„‡ÁËÌ‡
+	{  //  –ü–æ–ª—É—á–µ–Ω–∏–µ –≤–µ–∫—Ç–æ—Ä–∞ –º–∞–≥–∞–∑–∏–Ω–∞
 	return this->storeVector;
 	}
 
 std::vector<Item*> Profile::getOutfitVector()
-	{	//	œÓÎÛ˜ÂÌËÂ ÒÔËÒÍ‡ ˝ÍËÔËÓ‚ÍË
+	{  //  –ü–æ–ª—É—á–µ–Ω–∏–µ —Å–ø–∏—Å–∫–∞ —ç–∫–∏–ø–∏—Ä–æ–≤–∫–∏
 	return this->outfitVector;
 	}
 
 std::list<Item> Profile::getStorageList()
-	{	//	œÓÎÛ˜ÂÌËÂ ÒÔËÒÍ‡ ËÌ‚ÂÌÚ‡ˇ
+	{  //  –ü–æ–ª—É—á–µ–Ω–∏–µ —Å–ø–∏—Å–∫–∞ –∏–Ω–≤–µ–Ω—Ç–∞—Ä—è
 	return this->storageList;
 	}
 
 void Profile::info(const std::string& str)
-	{
+	{  //  –°—Ç—Ä–æ–∫–∞ —Ö–∞—Ä–∞–∫—Ç–µ—Ä–∏—Å—Ç–∏–∫ —Ä–æ–±–æ—Ç–∞
 	system("cls");
 	char ch1[11] = { 205,205,205,205,205,205,205,205,205,205,'\0' };
 	char ch2[11] = { 177,177,177,177,177,177,177,177,177,177,'\0' };
@@ -90,7 +90,7 @@ void Profile::info(const std::string& str)
 	}
 
 void Profile::menu(const std::string& str)
-	{
+	{  //  –®–∞–ø–∫–∞ –º–µ–Ω—é
 	system("cls");
 	char ch1[15] = { 205,205,205,205,205,205,205,205,205,205,205,205,205,205,'\0' };
 	char ch2[15] = { 177,177,177,177,177,177,177,177,177,177,177,177,177,177,'\0' };
@@ -101,17 +101,17 @@ void Profile::menu(const std::string& str)
 	if (str == "   HOMEPAGE   ")
 		{
 		std::cout << " 1. Campaign" << 
-				   "\t 2. Training" <<
-				   "\t 3. Store"    << 
-				   "\t 4. Robots"   << 
-				   "\t 0. Back"     << std::endl;
+		           "\t 2. Training" <<
+		           "\t 3. Store"    << 
+		           "\t 4. Robots"   << 
+		           "\t 0. Back"     << std::endl;
 		}
 	else if (str == "   ROBOSTORE  ")
 		{
 		std::cout << " 1. Weak robot (3 points)\t= $300"   << 
-				   "\n 2. Medium robot (6 points)\t= $600" << 
-				   "\n 3. Strong robot (9 points)\t= $900" << 
-				   "\n 0. Back"                            << std::endl;
+		           "\n 2. Medium robot (6 points)\t= $600" << 
+		           "\n 3. Strong robot (9 points)\t= $900" << 
+		           "\n 0. Back"                            << std::endl;
 		}
 	else if (str == "     STORE    ")
 		{
@@ -132,14 +132,14 @@ void Profile::menu(const std::string& str)
 
 	std::cout << " " << ch1 << ch1 << (char)205 << ch1 << (char)205 << ch1 << ch1 << " " << std::endl;
 	std::cout << " Robot: "  << (*this->currentRobot).getName() << 
-			   "\t XP: "     << (*currentRobot).getExperience() << 
-		  "/1000\t Points: " << (*currentRobot).getPoint()      << 
-			   "\t Money: "  << this->money << std::endl;
+	           "\t XP: "     << (*currentRobot).getExperience() << 
+	           "/1000\t Points: " << (*currentRobot).getPoint() << 
+	           "\t Money: "  << this->money << std::endl;
 	std::cout << " " << ch1 << ch1 << (char)205 << ch1 << (char)205 << ch1 << ch1 << " " << std::endl;
 	}
 
 void Profile::store()
-	{
+	{  //  –ò–Ω—Ç–µ—Ä—Ñ–µ–π—Å –º–∞–≥–∞–∑–∏–Ω–∞
 	filter = "";
 	int choice = 1;
 
@@ -147,9 +147,9 @@ void Profile::store()
 		{
 		menu("     STORE    ");
 		std::cout << " 1. Buy/sell outfit" << 
-				   "\t 2. Buy/sell robots" << 
-				   "\t 3. Filter"          << 
-				   "\t 0. Back\n\n"        << " Your choice: ";
+		           "\t 2. Buy/sell robots" << 
+		           "\t 3. Filter"          << 
+		           "\t 0. Back\n\n"        << " Your choice: ";
 		choice = cinDebug();
 
 		switch (choice)
@@ -157,7 +157,7 @@ void Profile::store()
 			case 0:
 				{
 				std::cout << "\n Are you sure?\n\n" << " 0. Yes\n"  << 
-													   " 1. No\n\n" << " Your choice: ";
+				                                       " 1. No\n\n" << " Your choice: ";
 				choice = cinDebug();
 				break;
 				}
@@ -168,8 +168,8 @@ void Profile::store()
 					{
 					menu("     STORE    ");
 					std::cout << " 1. Buy outfit"  << 
-							   "\t 2. Sell outfit" << 
-							   "\t 0. Back\n\n"    << " Your choice: ";
+					           "\t 2. Sell outfit" << 
+					           "\t 0. Back\n\n"    << " Your choice: ";
 					choice = cinDebug();
 
 					switch (choice)
@@ -216,8 +216,8 @@ void Profile::store()
 							int i;
 							menu("    STORAGE   ");
 							std::cout << " 1. Wearing now" << 
-								       "\t 2. In baggage"  <<
-									   "\t 0. Back\n\n"    << " Your choice: ";
+							           "\t 2. In baggage"  <<
+							           "\t 0. Back\n\n"    << " Your choice: ";
 							choice = cinDebug();
 							
 							switch (choice)
@@ -294,8 +294,8 @@ void Profile::store()
 					{
 					menu("    ROBOTS    ");
 					std::cout << " 1. Buy robot"  << 
-							   "\t 2. Sell robot" << 
-							   "\t 0. Back\n\n"   << " Your choice: ";
+					           "\t 2. Sell robot" << 
+					           "\t 0. Back\n\n"   << " Your choice: ";
 					choice = cinDebug();
 
 					switch (choice)
@@ -395,16 +395,16 @@ void Profile::store()
 	}
 
 void Profile::robots()
-	{
+	{  //  –ò–Ω—Ç–µ—Ä—Ñ–µ–π—Å –∞–Ω–≥–∞—Ä–∞ —Å —Ä–æ–±–æ—Ç–∞–º–∏ –∏–≥—Ä–æ–∫–∞
 	int choice = 1;
 
 	while (choice)
 		{
 		menu("    ROBOTS    ");
 		std::cout << " 1. Choose"                 << 
-				   "\t 2. Edit"                   << 
-				   "\t 3. Put on/take off outfit" << 
-				   "\t 0. Back\n\n"               << " Your choice: ";
+		           "\t 2. Edit"                   << 
+		           "\t 3. Put on/take off outfit" << 
+		           "\t 0. Back\n\n"               << " Your choice: ";
 		choice = cinDebug();
 
 		switch (choice)
@@ -412,7 +412,7 @@ void Profile::robots()
 			case 0:
 				{
 				std::cout << "\n Are you sure?\n\n" << " 0. Yes\n"  << 
-													   " 1. No\n\n" << " Your choice: ";
+				                                       " 1. No\n\n" << " Your choice: ";
 				choice = cinDebug();
 				break;
 				}
@@ -469,8 +469,8 @@ void Profile::robots()
 				int i;
 				menu("    STORAGE   ");
 				std::cout << " 1. Put on"   << 
-						   "\t 2. Take off" << 
-						   "\t 0. Back\n\n" << " Your choice: ";
+				           "\t 2. Take off" << 
+				           "\t 0. Back\n\n" << " Your choice: ";
 				choice = cinDebug();
 
 				switch (choice)
@@ -539,7 +539,7 @@ void Profile::robots()
 	}
 
 void Profile::start()
-{
+{  //  –ó–∞–ø—É—Å–∫ –º–µ–Ω—é
 	mciSendString("play audio/start.mp3 repeat", NULL, 0, NULL);
 	setCurrentRobot(playerList.front());
 	int choice = 1;
@@ -561,6 +561,7 @@ void Profile::start()
 			case 1:
 				{
 				mciSendString("stop audio/start.mp3", NULL, 0, NULL);
+				std::cout << " Boss fights are not available in demo mode!" << std::endl;
 				system("pause");
 				mciSendString("play audio/start.mp3 repeat", NULL, 0, NULL);
 				break;
@@ -626,14 +627,14 @@ void Profile::start()
 	}
 
 void Profile::edit(const std::string& str)
-	{
+	{  //  –ò–Ω—Ç–µ—Ä—Ñ–µ–π—Å —Ä–µ–¥–∞–∫—Ç–æ—Ä–∞ —Ä–æ–±–æ—Ç–∞
 	int choice = 1;
 	while (choice)
 		{
 		info(str);
 		std::cout << " What will you do?\n\n" << " 0. Finish\n"        << 
-												 " 1. Change name\n"   << 
-												 " 2. Edit skills\n\n" << " Your choice: ";
+		                                         " 1. Change name\n"   << 
+		                                         " 2. Edit skills\n\n" << " Your choice: ";
 		choice = cinDebug();
 		std::cout << std::endl;
 
@@ -682,18 +683,18 @@ void Profile::edit(const std::string& str)
 	}
 
 void Profile::fightPanel(Fight& _player, Fight& _enemy, const int& _x, const int& _y)
-{
+{  //  –°—Ç—Ä–æ–∫–∞ —Å–æ—Å—Ç–æ—è–Ω–∏—è –±–æ—è
 	system("cls");
 	char ch1[11] = { 205,205,205,205,205,205,205,205,205,205,'\0' };
 	std::cout << ch1 << ch1 << " \t\t\t\t" << ch1 << ch1 << std::endl;
 	std::cout << _player.getFighterName() << ": " << _player.getHP() << " HP\t\t\t\t\t" << _enemy.getFighterName() << 
-											 ": " << _enemy.getHP()  << " HP" << std::endl;
+	                                         ": " << _enemy.getHP()  << " HP" << std::endl;
 	std::cout << ch1 << ch1 << " \t\t\t\t" << ch1 << ch1 << std::endl << std::endl;
 	std::cout << _x << " + " << _y << std::endl << std::endl << std::endl;
 }
 
 void Profile::distributeSkills()
-	{
+	{  //  –ò–Ω—Ç–µ—Ä—Ñ–µ–π—Å —Ä–∞—Å–ø—Ä–µ–¥–µ–ª–µ–Ω–∏—è –æ—á–∫–æ–≤ —Ö–∞—Ä–∞–∫—Ç–µ—Ä–∏—Å—Ç–∏–∫
 	std::string choice = "";
 	int skill, point = (*currentRobot).getPoint();
 
@@ -763,7 +764,7 @@ void Profile::distributeSkills()
 	}
 
 void Profile::showStore(const std::string& filter)
-	{
+	{  //  –°—Ç—Ä–æ–∫–∞ –∞—Å—Å–æ—Ä—Ç–∏–º–µ–Ω—Ç–∞ –º–∞–≥–∞–∑–∏–Ω–∞
 	std::cout << " ID: \tAg-ty: \tDmg: \tArmor: \tCost: \tType: \t\tName:" << std::endl;
 
 	for (int i = 0; i < this->storeVector.size(); ++i)
@@ -771,17 +772,17 @@ void Profile::showStore(const std::string& filter)
 		if (filter == "" || storeVector[i].type == filter)
 			{
 			std::cout << " " << i+1 << " \t" << storeVector[i].agilityEffect << 
-									   " \t" << storeVector[i].damageEffect  << 
-									   " \t" << storeVector[i].armorEffect;
+			                           " \t" << storeVector[i].damageEffect  << 
+			                           " \t" << storeVector[i].armorEffect;
 			std::cout << " \t" << storeVector[i].cost   << 
-						 " \t" << storeVector[i].type   << 
-						 " \t\t" << storeVector[i].name << std::endl;
+			             " \t" << storeVector[i].type   << 
+			             " \t\t" << storeVector[i].name << std::endl;
 			}
 		}
 	}
 
 void Profile::showStorage()
-	{
+	{  //  –°—Ç—Ä–æ–∫–∞ –∞—Å—Å–æ—Ä—Ç–∏–º–µ–Ω—Ç–∞ –∏–≥—Ä–æ–∫–∞
 	std::cout << "=== Wearing now ===\n" << std::endl;
 
 	if ((*this->currentRobot).outfitIsEmpty() == false)
@@ -791,41 +792,41 @@ void Profile::showStorage()
 		if ((*this->currentRobot).getOutfit().head.name != "")
 			{
 			std::cout << " " << 1 << " \t" << (*this->currentRobot).getOutfit().head.agilityEffect << 
-									 " \t" << (*this->currentRobot).getOutfit().head.damageEffect  << 
-									 " \t" << (*this->currentRobot).getOutfit().head.armorEffect;
+			                         " \t" << (*this->currentRobot).getOutfit().head.damageEffect  << 
+			                         " \t" << (*this->currentRobot).getOutfit().head.armorEffect;
 			std::cout << " \t"   << (*this->currentRobot).getOutfit().head.cost / 2 << 
-					     " \t"   << (*this->currentRobot).getOutfit().head.type     << 
-					     " \t\t" << (*this->currentRobot).getOutfit().head.name     << std::endl;
+			             " \t"   << (*this->currentRobot).getOutfit().head.type     << 
+			             " \t\t" << (*this->currentRobot).getOutfit().head.name     << std::endl;
 			}
 
 		if ((*this->currentRobot).getOutfit().body.name != "")
 			{
 			std::cout << " " << 2 << " \t" << (*this->currentRobot).getOutfit().body.agilityEffect << 
-									 " \t" << (*this->currentRobot).getOutfit().body.damageEffect  << 
-									 " \t" << (*this->currentRobot).getOutfit().body.armorEffect;
+			                         " \t" << (*this->currentRobot).getOutfit().body.damageEffect  << 
+			                         " \t" << (*this->currentRobot).getOutfit().body.armorEffect;
 			std::cout << " \t"   << (*this->currentRobot).getOutfit().body.cost / 2 << 
-				         " \t"   << (*this->currentRobot).getOutfit().body.type     << 
-				         " \t\t" << (*this->currentRobot).getOutfit().body.name     << std::endl;
+			             " \t"   << (*this->currentRobot).getOutfit().body.type     << 
+			             " \t\t" << (*this->currentRobot).getOutfit().body.name     << std::endl;
 			}
 
 		if ((*this->currentRobot).getOutfit().hands.name != "")
 			{
 			std::cout << " " << 3 << " \t" << (*this->currentRobot).getOutfit().hands.agilityEffect << 
-									 " \t" << (*this->currentRobot).getOutfit().hands.damageEffect  << 
-									 " \t" << (*this->currentRobot).getOutfit().hands.armorEffect;
+			                         " \t" << (*this->currentRobot).getOutfit().hands.damageEffect  << 
+			                         " \t" << (*this->currentRobot).getOutfit().hands.armorEffect;
 			std::cout << " \t"   << (*this->currentRobot).getOutfit().hands.cost / 2 << 
-						 " \t"   << (*this->currentRobot).getOutfit().hands.type     << 
-						 " \t\t" << (*this->currentRobot).getOutfit().hands.name     << std::endl;
+			             " \t"   << (*this->currentRobot).getOutfit().hands.type     << 
+			             " \t\t" << (*this->currentRobot).getOutfit().hands.name     << std::endl;
 			}
 
 		if ((*this->currentRobot).getOutfit().legs.name != "")
 			{
 			std::cout << " " << 4 << " \t" << (*this->currentRobot).getOutfit().legs.agilityEffect << 
-									 " \t" << (*this->currentRobot).getOutfit().legs.damageEffect  << 
-									 " \t" << (*this->currentRobot).getOutfit().legs.armorEffect;
+			                         " \t" << (*this->currentRobot).getOutfit().legs.damageEffect  << 
+			                         " \t" << (*this->currentRobot).getOutfit().legs.armorEffect;
 			std::cout << " \t"   << (*this->currentRobot).getOutfit().legs.cost / 2 << 
-						 " \t"   << (*this->currentRobot).getOutfit().legs.type     << 
-						 " \t\t" << (*this->currentRobot).getOutfit().legs.name     << std::endl;
+			             " \t"   << (*this->currentRobot).getOutfit().legs.type     << 
+			             " \t\t" << (*this->currentRobot).getOutfit().legs.name     << std::endl;
 			}
 		}
 
@@ -840,11 +841,11 @@ void Profile::showStorage()
 		for (auto it : this->storageList)
 			{
 			std::cout << " " << i << " \t" << it.agilityEffect << 
-									 " \t" << it.damageEffect  << 
-									 " \t" << it.armorEffect;
+			                         " \t" << it.damageEffect  << 
+			                         " \t" << it.armorEffect;
 			std::cout << " \t"   << it.cost / 2 << 
-						 " \t"   << it.type     << 
-						 " \t\t" << it.name     << std::endl;
+			             " \t"   << it.type     << 
+			             " \t\t" << it.name     << std::endl;
 			++i;
 			}
 		}
@@ -853,69 +854,69 @@ void Profile::showStorage()
 	}
 
 void Profile::showRobots()
-	{
+	{  //  –°—Ç—Ä–æ–∫–∞ —Ä–æ–±–æ—Ç–æ–≤ –∏–≥—Ä–æ–∫–∞
 	int i = 1;
 	std::cout << " ID: \tS: \tP: \tA: \tHP: \tArmor: \tDmg: \tCost: \tName:" << std::endl;
 
 	for (auto it : this->playerList)
 		{
 		std::cout << " " << i << " \t" << it.getStrenght()   << 
-								 " \t" << it.getProtection() << 
-								 " \t" << it.getAgility()    << 
-								 " \t" << it.getTotalHealth();
+		                         " \t" << it.getProtection() << 
+		                         " \t" << it.getAgility()    << 
+		                         " \t" << it.getTotalHealth();
 		std::cout << " \t" << it.getArmor()       << 
-					 " \t" << it.getTotalDamage() << 
-					 " \t" << it.getCost()        << 
-					 " \t" << it.getName()        << std::endl;
+		             " \t" << it.getTotalDamage() << 
+		             " \t" << it.getCost()        << 
+		             " \t" << it.getName()        << std::endl;
 		++i;
 		}
 	}
 
 void Profile::showEnemies()
-{
+{  //  –°—Ç—Ä–æ–∫–∞ —Å –∏–Ω—Ñ–æ—Ä–º–∞—Ü–∏–µ–π –æ –∫–ª–∞–Ω–∞—Ö –ø—Ä–æ—Ç–∏–≤–Ω–∏–∫–æ–≤
 	std::cout << " ID: \tDmg: \tHP: \tClan:" << std::endl;
 
 	for (int i = 0; i < this->mobsVector.size(); ++i)
 	{
 		std::cout << " " << i + 1 << " \t" << this->mobsVector[i].getTotalDamage() << 
-									 " \t" << this->mobsVector[i].getTotalHealth() << 
-									 " \t" << this->mobsVector[i].getName()        << std::endl;
+		                             " \t" << this->mobsVector[i].getTotalHealth() << 
+		                             " \t" << this->mobsVector[i].getName()        << std::endl;
 	}
 }
 
 void Profile::setStoreVector()
-	{
+	{  //  –ò–Ω–∏—Ü–∏–∞–ª–∏–∑–∞—Ü–∏—è –º–∞–≥–∞–∑–∏–Ω–∞
 	this->storeVector = { {  2, 0, 15, 300,  "head",  "Copper Helmet"      },
-						  {  2, 0, 20, 400,  "body",  "Copper Armor"       },
-						  {  2, 1, 10, 350,  "hands", "Copper Gauntlets"   },
-						  {  2, 1, 10, 350,  "legs",  "Copper Boots"       },
-						  {  1, 1, 60, 600,  "head",  "Iron Helmet"        },
-						  {  1, 1, 70, 700,  "body",  "Iron Armor"         },
-						  {  1, 2, 50, 650,  "hands", "Iron Gauntlets"     },
-						  {  1, 2, 50, 650,  "legs",  "Iron Boots"         },
-						  {  0, 1, 90, 1100, "head",  "Titanium Helmet"    },
-						  {  0, 2, 120, 1300, "body",  "Titanium Armor"     },
-						  {  0, 3, 80, 1250, "hands", "Titanium Gauntlets" },
-						  {  0, 3, 80, 1250, "legs",  "Titanium Boots"     },
-						  { -1, 5, 130, 1400, "head",  "Chromic Helmet"     },
-						  { -3, 5, 150, 1600, "body",  "Chromic Armor"      },
-						  { -1, 8, 120, 1500, "hands", "Chromic Gauntlets"  },
-						  { -1, 8, 120, 1500, "legs",  "Chromic Boots"      },
-						  { -2, 2, 250, 1750, "head",  "Tungsten Helmet"    },
-						  { -4, 2, 300, 2000, "body",  "Tungsten Armor"     },
-						  { -3, 3, 220, 1800, "hands", "Tungsten Gauntlets" },
-						  { -3, 3, 220, 1800, "legs",  "Tungsten Boots"     } };
+	                      {  2, 0, 20, 400,  "body",  "Copper Armor"       },
+	                      {  2, 1, 10, 350,  "hands", "Copper Gauntlets"   },
+	                      {  2, 1, 10, 350,  "legs",  "Copper Boots"       },
+	                      {  1, 1, 60, 600,  "head",  "Iron Helmet"        },
+	                      {  1, 1, 70, 700,  "body",  "Iron Armor"         },
+	                      {  1, 2, 50, 650,  "hands", "Iron Gauntlets"     },
+	                      {  1, 2, 50, 650,  "legs",  "Iron Boots"         },
+	                      {  0, 1, 90, 1100, "head",  "Titanium Helmet"    },
+	                      {  0, 2, 120, 1300, "body",  "Titanium Armor"     },
+	                      {  0, 3, 80, 1250, "hands", "Titanium Gauntlets" },
+	                      {  0, 3, 80, 1250, "legs",  "Titanium Boots"     },
+	                      { -1, 5, 130, 1400, "head",  "Chromic Helmet"     },
+	                      { -3, 5, 150, 1600, "body",  "Chromic Armor"      },
+	                      { -1, 8, 120, 1500, "hands", "Chromic Gauntlets"  },
+	                      { -1, 8, 120, 1500, "legs",  "Chromic Boots"      },
+	                      { -2, 2, 250, 1750, "head",  "Tungsten Helmet"    },
+	                      { -4, 2, 300, 2000, "body",  "Tungsten Armor"     },
+	                      { -3, 3, 220, 1800, "hands", "Tungsten Gauntlets" },
+	                      { -3, 3, 220, 1800, "legs",  "Tungsten Boots"     } };
 	}
 
 void Profile::setMobsVector()
-	{	//	«‡ÔÓÎÌÂÌËÂ ‚ÂÍÚÓ‡ ‚‡„Ó‚
+	{  //  –ò–Ω–∏—Ü–∏–∞–ª–∏–∑–∞—Ü–∏—è –≤–µ–∫—Ç–æ—Ä–∞ –≤—Ä–∞–≥–æ–≤
 	std::vector<Robot> enemies = { { 1, 1, 1, 100, 10, "Renegade" },
-								   { 2, 4, 2, 150, 15, "Guardian" },
-								   { 3, 3, 2, 150, 15, "Observer" },
-								   { 3, 6, 4, 200, 20, "Armadillo"},
-								   { 6, 2, 5, 200, 20, "Hunter"   },
-								   { 7, 3, 8, 250, 25, "Assassin" },
-								   { 9, 6, 3, 250, 25, "Panzer"   } };
+	                               { 2, 4, 2, 150, 15, "Guardian" },
+	                               { 3, 3, 2, 150, 15, "Observer" },
+	                               { 3, 6, 4, 200, 20, "Armadillo"},
+	                               { 6, 2, 5, 200, 20, "Hunter"   },
+	                               { 7, 3, 8, 250, 25, "Assassin" },
+	                               { 9, 6, 3, 250, 25, "Panzer"   } };
 		
 	for (int i = 0; i < NUMBER_OF_CLANS; ++i)
 		{
@@ -925,7 +926,7 @@ void Profile::setMobsVector()
 	}
 
 void Profile::setBossesStack(Basic& data)
-	{	//	«‡ÔÓÎÌÂÌËÂ ÒÚÂÍ‡ ‚‡„Ó‚-·ÓÒÒÓ‚
+	{  //  –ò–Ω–∏—Ü–∏–∞–ª–∏–∑–∞—Ü–∏—è —Å—Ç–µ–∫–∞ –≤—Ä–∞–≥–æ–≤-–±–æ—Å—Å–æ–≤
 	std::vector<Robot> bosses = { };
 
 	for (int i = 0; i < NUMBER_OF_CLANS; ++i)
@@ -936,7 +937,7 @@ void Profile::setBossesStack(Basic& data)
 	}
 
 void Profile::setOutfitVector()
-	{
+	{  //  –ó–∞–ø–æ–ª–Ω–µ–Ω–∏–µ –≤–µ–∫—Ç–æ—Ä–∞ —Å–Ω–∞—Ä—è–∂–µ–Ω–∏—è
 	if ((*this->currentRobot).getOutfit().head.name != "")
 		{
 		this->outfitVector.push_back(new Item((*this->currentRobot).getOutfit().head));
@@ -959,7 +960,7 @@ void Profile::setOutfitVector()
 	}
 
 void Profile::putOutfitRobot(const Item& data)
-	{
+	{  //  –ù–∞–¥–µ—Ç—å —Å–Ω–∞—Ä—è–∂–µ–Ω–∏–µ
 	if ((*this->currentRobot).getOutfit().head.type == data.type)
 		{
 		if ((*this->currentRobot).getOutfit().head.name != "")

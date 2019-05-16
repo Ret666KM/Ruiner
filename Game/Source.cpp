@@ -124,9 +124,9 @@ Player::Player(int points)
 	setName("Unnamed");
 	this->experience = 0;
 	this->outfit = { { 0, 0, 0, 0, "head" , "" }, 
-					 { 0, 0, 0, 0, "body" , "" }, 
-					 { 0, 0, 0, 0, "hands", "" }, 
-					 { 0, 0, 0, 0, "legs" , "" } };
+	                 { 0, 0, 0, 0, "body" , "" }, 
+	                 { 0, 0, 0, 0, "hands", "" }, 
+	                 { 0, 0, 0, 0, "legs" , "" } };
 	}
 
 void Player::setPoint(int& value)
@@ -177,32 +177,32 @@ Equipment Player::getOutfit()
 int Player::getCost()
 	{  //  Отображение ценности с учётом экипировки
 	return (this->cost + this->outfit.head.cost + this->outfit.body.cost + 
-			this->outfit.hands.cost + this->outfit.legs.cost) / 2;
+	       this->outfit.hands.cost + this->outfit.legs.cost) / 2;
 	}
 
 int Player::getArmor()
 	{  //  Отображение показателя брони
 	return this->outfit.head.armorEffect + this->outfit.body.armorEffect + 
-		   this->outfit.hands.armorEffect + this->outfit.legs.armorEffect;
+	       this->outfit.hands.armorEffect + this->outfit.legs.armorEffect;
 	}
 
 bool Player::outfitIsEmpty()
 	{  //  Проверка на наличие экипировки
 	return (this->outfit.head.name == "" && this->outfit.body.name == "" && 
-			this->outfit.hands.name == "" && this->outfit.legs.name == "");
+	        this->outfit.hands.name == "" && this->outfit.legs.name == "");
 	}
 
 int Player::getAgility()
 	{  //  Отображение показателя ловкости с учётом экипировки
 	return this->node.agility + this->outfit.head.agilityEffect + this->outfit.body.agilityEffect + 
-		   this->outfit.hands.agilityEffect + this->outfit.legs.agilityEffect;
+	       this->outfit.hands.agilityEffect + this->outfit.legs.agilityEffect;
 	}
 
 int Player::getTotalDamage()
 	{  //  Отображение урона с учётом экипировки
 	return this->totalDamage = this->node.strength * STRENGHT_MULTIPLIER + this->node.damage 
-							 + this->outfit.head.damageEffect + this->outfit.body.damageEffect 
-							 + this->outfit.hands.damageEffect + this->outfit.legs.damageEffect;
+	                         + this->outfit.head.damageEffect + this->outfit.body.damageEffect 
+	                         + this->outfit.hands.damageEffect + this->outfit.legs.damageEffect;
 	}
 
 /********************************

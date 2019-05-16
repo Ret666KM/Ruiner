@@ -1,44 +1,44 @@
-#include "Header.h"
+ï»¿#include "Header.h"
 
 /********************************
-		  Ôóíêöèè Fight
+          Ð¤ÑƒÐ½ÐºÑ†Ð¸Ð¸ Fight
 ********************************/
 
 Fight::Fight()
-	{	//	Êîíñòðóêòîð ïî-óìîë÷àíèþ
+	{  //  ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¿Ð¾-ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ
 	}
 
 Fight::Fight(Basic& data)
-	{	//	Êîíñòðóêòîð âðàãà
+	{  //  ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð²Ñ€Ð°Ð³Ð°
 	this->attacker = data;
 	this->HP = data.getTotalHealth();
 	this->dodgeChance = data.getAgility() * AGILITY_MULTIPLIER;
 	}
 
 Fight::Fight(Player& data)
-	{	//	Êîíñòðóêòîð èãðîêà
+	{  //  ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¸Ð³Ñ€Ð¾ÐºÐ°
 	this->attacker = data;
 	this->HP = data.getTotalHealth() + data.getArmor();
 	this->dodgeChance = data.getAgility() * AGILITY_MULTIPLIER;
 	}
 
 int Fight::getHP()
-	{	//	Îòîáðàæåíèå çäîðîâüÿ
+	{  //  ÐžÑ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ Ð·Ð´Ð¾Ñ€Ð¾Ð²ÑŒÑ
 	return this->HP;
 	}
 
 std::string Fight::getFighterName()
-	{	//	Îòîáðàæåíèå èìåíè
+	{  //  ÐžÑ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ Ð¸Ð¼ÐµÐ½Ð¸
 	return this->attacker.getName();
 	}
 
 void Fight::strike(Fight& data)
-	{	//	Íàíåñåíèå óðîíà
+	{  //  ÐÐ°Ð½ÐµÑÐµÐ½Ð¸Ðµ ÑƒÑ€Ð¾Ð½Ð°
 	data.takeDamage(this->attacker.getTotalDamage());
 	}
 
 void Fight::takeDamage(const int& value)
-	{	//	Ïîëó÷åíèå óðîíà
+	{  //  ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÑƒÑ€Ð¾Ð½Ð°
 	int hitFactor;
 	srand(time(NULL));
 	hitFactor = rand() % 101;
@@ -59,7 +59,7 @@ void Fight::takeDamage(const int& value)
 	}
 
 /********************************
-		  Áèòâà ðîáîòîâ
+          Ð‘Ð¸Ñ‚Ð²Ð° Ñ€Ð¾Ð±Ð¾Ñ‚Ð¾Ð²
 ********************************/
 
 bool Profile::fight(Basic &data)
@@ -72,7 +72,7 @@ bool Profile::fight(Basic &data)
 	mciSendString("play audio/fight.mp3 repeat", NULL, 0, NULL);
 		
 	std::thread th([&]()
-		{	//	Ïîòîê áèòâû âðàãà
+		{  //  ÐŸÐ¾Ñ‚Ð¾Ðº Ð±Ð¸Ñ‚Ð²Ñ‹ Ð²Ñ€Ð°Ð³Ð°
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
 		while (enemy.getHP() > 0 && player.getHP() > 0)
